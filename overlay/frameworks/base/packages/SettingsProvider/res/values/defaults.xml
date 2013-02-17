@@ -17,5 +17,5 @@
  */
 -->
 <resources>
-    <bool name="def_accelerometer_rotation">false</bool>
+    <integer name="def_screen_off_timeout">30000</integer>
 </resources>

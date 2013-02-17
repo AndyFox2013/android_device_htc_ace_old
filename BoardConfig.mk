@@ -23,7 +23,7 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
+
 
 # inherit from common msm7x30
 -include device/htc/msm7x30-common/BoardConfigCommon.mk
@@ -31,6 +31,10 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/htc/ace/BoardConfigVendor.mk
 
+# Compiler Optimization
+ARCH_ARM_HIGH_OPTIMIZATION := true
+
+# Kernel & Boot Loader
 TARGET_BOOTLOADER_BOARD_NAME := spade
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
@@ -38,10 +42,9 @@ BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE) msmsdcc_power_gpio=88
 BOARD_KERNEL_BASE := 0x4000000
 BOARD_KERNEL_PAGE_SIZE := 4096
 
-# Workaround for Ace's broken overlay scaling
-BOARD_OVERLAY_MINIFICATION_LIMIT := 2
-
+# GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := spade
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # cat /proc/emmc
 #dev:        size     erasesize name
@@ -61,8 +64,12 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-TARGET_PREBUILT_KERNEL := device/htc/msm7x30-common/msm7230/kernel
 
+TARGET_KERNEL_SOURCE := kernel/htc/KangBanged-7x30
+TARGET_KERNEL_CONFIG := kangbang_defconfig
+#TARGET_PREBUILT_KERNEL := device/htc/ace/prebuilt/kernel/kernel
+
+BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
@@ -70,5 +77,9 @@ BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 
-BOARD_CUSTOM_GRAPHICS:=../../../device/htc/ace/recovery/graphics.c
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:=../../device/htc/ace/recovery/recovery_ui.c
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun0/file
+TARGET_BOOTANIMATION_USE_RGB565 := true
+
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/ace/bluetooth
