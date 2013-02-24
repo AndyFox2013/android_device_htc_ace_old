@@ -61,7 +61,9 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-TARGET_PREBUILT_KERNEL := device/htc/msm7x30-common/msm7230/kernel
+# TARGET_PREBUILT_KERNEL := device/htc/msm7x30-common/msm7230/kernel
+TARGET_KERNEL_CONFIG := cyanogenmod_ace_defconfig
+TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
